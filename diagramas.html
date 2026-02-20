@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas Técnicos - SIGA | CBM-MT</title>
+    <meta name="description" content="Galeria interativa com 27 diagramas técnicos do SIGA - Sistema Integrado de Gestão de Almoxarifado do CBM-MT">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cbm: {
+              50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca',
+              300: '#fca5a5', 400: '#f87171', 500: '#ef4444',
+              600: '#dc2626', 700: '#b91c1c', 800: '#991b1b',
+              900: '#7f1d1d', 950: '#450a0a'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- Viewer.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.3/viewer.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="no-print" style="width: 0%"></div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-none transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-18">
+
+                <!-- Brand -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                    <div>
+                        <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400 group-hover:text-cbm-600 transition-colors">SIGA</span>
+                        <span class="hidden sm:block text-xs text-slate-500 dark:text-slate-400 leading-none">Documentação Técnica</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Início</a>
+                    <a href="modulos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Módulos</a>
+                    <a href="arquitetura.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Arquitetura</a>
+                    <a href="diagramas.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-cbm-500 nav-link-active hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Diagramas</a>
+                    <a href="processos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Processos</a>
+                    <a href="seguranca.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Segurança</a>
+                    <a href="downloads.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Downloads</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Alternar tema">
+                        <i id="theme-icon" class="fas fa-sun text-lg"></i>
+                    </button>
+
+                    <!-- Hamburger (mobile) -->
+                    <button id="hamburger" class="lg:hidden hamburger flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden no-print"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 bg-white dark:bg-slate-800 z-50 shadow-2xl lg:hidden no-print">
+        <div class="p-6 pt-20 flex flex-col gap-2">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-home w-5 text-center text-cbm-500"></i> Início
+            </a>
+            <a href="modulos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-cubes w-5 text-center text-cbm-500"></i> Módulos
+            </a>
+            <a href="arquitetura.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-layer-group w-5 text-center text-cbm-500"></i> Arquitetura
+            </a>
+            <a href="diagramas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-cbm-500 font-semibold bg-cbm-50 dark:bg-cbm-900/20 transition-colors">
+                <i class="fas fa-project-diagram w-5 text-center text-cbm-500"></i> Diagramas
+            </a>
+            <a href="processos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-sitemap w-5 text-center text-cbm-500"></i> Processos
+            </a>
+            <a href="seguranca.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-shield-alt w-5 text-center text-cbm-500"></i> Segurança
+            </a>
+            <a href="downloads.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-download w-5 text-center text-cbm-500"></i> Downloads
+            </a>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE HEADER ==================== -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-30"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumb -->
+            <nav class="mb-6" data-aos="fade-down" data-aos-duration="600">
+                <ol class="flex items-center gap-2 text-sm text-slate-400">
+                    <li><a href="index.html" class="hover:text-cbm-400 transition-colors">Início</a></li>
+                    <li><i class="fas fa-chevron-right text-xs text-slate-600"></i></li>
+                    <li class="text-cbm-400 font-medium">Diagramas</li>
+                </ol>
+            </nav>
+
+            <!-- Title -->
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-3" data-aos="fade-up" data-aos-duration="700">
+                        Diagramas <span class="text-cbm-400">Técnicos</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 max-w-2xl" data-aos="fade-up" data-aos-delay="100">
+                        Galeria interativa com 27 diagramas técnicos do SIGA
+                    </p>
+                </div>
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cbm-900/50 text-cbm-300 border border-cbm-700/30 backdrop-blur-sm text-sm font-semibold">
+                        <i class="fas fa-project-diagram"></i>
+                        <span id="diagram-count">27</span> diagramas
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FILTER BAR ==================== -->
+    <div class="sticky top-16 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700/50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                <button data-filter="todos" data-tooltip="Exibir todos os 27 diagramas do sistema" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cbm-700 text-white">
+                    Todos
+                </button>
+                <button data-filter="erd" data-tooltip="Entidade-Relacionamento: mostra as tabelas do banco de dados e como elas se conectam entre si" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    ERD
+                </button>
+                <button data-filter="uml" data-tooltip="Linguagem de Modelagem Unificada: representa a estrutura de classes e objetos do sistema" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    UML
+                </button>
+                <button data-filter="dfd" data-tooltip="Diagrama de Fluxo de Dados: mostra como as informações percorrem o sistema entre os processos" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    DFD
+                </button>
+                <button data-filter="sequencia" data-tooltip="Diagrama de Sequência: ilustra a ordem das interações entre componentes ao longo do tempo" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    Sequência
+                </button>
+                <button data-filter="casos" data-tooltip="Diagrama de Casos de Uso: mostra as funcionalidades disponíveis para cada tipo de usuário" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    Casos de Uso
+                </button>
+                <button data-filter="componentes" data-tooltip="Diagrama de Componentes: representa os módulos e camadas da arquitetura do sistema" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    Componentes
+                </button>
+                <button data-filter="implantacao" data-tooltip="Diagrama de Implantação: detalha a infraestrutura, servidores e estratégias de banco de dados" class="flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-slate-200 dark:bg-slate-700/50 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700">
+                    Implantação
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DIAGRAM GALLERY ==================== -->
+    <section class="py-12 bg-slate-50 dark:bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div id="diagram-gallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- ===== ERD (2) ===== -->
+
+                <!-- 1. ERD - Operacoes e Movimentacoes -->
+                <div class="diagram-card" data-category="erd" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(0)">
+                            <img src="images/ERD-OperaçõeseMovimentações.png" alt="ERD - Operações e Movimentações" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">ERD - Operações e Movimentações</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">ERD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. ERD - Notificacoes e Auditoria -->
+                <div class="diagram-card" data-category="erd" data-aos="fade-up" data-aos-delay="50">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(1)">
+                            <img src="images/ERD-SistemadeNotificaçõeseAuditoria.png" alt="ERD - Notificações e Auditoria" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">ERD - Notificações e Auditoria</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">ERD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== UML Classes (4) ===== -->
+
+                <!-- 3. Classes - Modulo de Configuracao -->
+                <div class="diagram-card" data-category="uml" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(2)">
+                            <img src="images/ClassesPrincipais-MódulodeConfiguração.png" alt="Classes - Módulo de Configuração" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Classes - Módulo de Configuração</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">UML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Hierarquia de Classes de Material -->
+                <div class="diagram-card" data-category="uml" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(3)">
+                            <img src="images/HierarquiadeClassesdeMaterial.png" alt="Hierarquia de Classes de Material" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Hierarquia de Classes de Material</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">UML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Classes de Almoxarifado e Localizacao -->
+                <div class="diagram-card" data-category="uml" data-aos="fade-up" data-aos-delay="200">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(4)">
+                            <img src="images/ClassesdeAlmoxarifadoeLocalização.png" alt="Classes de Almoxarifado e Localizacao" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Classes de Almoxarifado e Localização</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">UML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Classes de Operacao e Movimentacao -->
+                <div class="diagram-card" data-category="uml" data-aos="fade-up" data-aos-delay="250">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(5)">
+                            <img src="images/ClassesdeOperaçãoeMovimentação.png" alt="Classes de Operacao e Movimentacao" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Classes de Operação e Movimentação</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">UML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== DFD/Fluxo (6) ===== -->
+
+                <!-- 7. DFD Nivel 0 - Visao Geral -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(6)">
+                            <img src="images/DFDNível0-VisãoGeraldoSistema.png" alt="DFD Nível 0 - Visão Geral" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">DFD Nível 0 - Visão Geral</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">DFD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. DFD Nivel 1 - Processos Detalhados -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="50">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(7)">
+                            <img src="images/DFDNível1-ProcessosDetalhados.png" alt="DFD Nível 1 - Processos Detalhados" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">DFD Nível 1 - Processos Detalhados</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">DFD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. DFD Nivel 2 - Operacoes -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(8)">
+                            <img src="images/DFDNível2-ProcessodeOperaçõesDetalhado.png" alt="DFD Nível 2 - Operações" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">DFD Nível 2 - Operações</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">DFD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Processo de Entrada de Material -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(9)">
+                            <img src="images/ProcessodeEntradadeMaterial.png" alt="Processo de Entrada de Material" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Processo de Entrada de Material</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">DFD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Processo de Saida/Cautela -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="200">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(10)">
+                            <img src="images/ProcessodeSaídadeMaterialCautela.png" alt="Processo de Saída/Cautela" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Processo de Saída/Cautela</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">DFD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Fluxo de Dados e Comunicacao -->
+                <div class="diagram-card" data-category="dfd" data-aos="fade-up" data-aos-delay="250">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(11)">
+                            <img src="images/FluxodeDadoseComunicação.png" alt="Fluxo de Dados e Comunicação" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Fluxo de Dados e Comunicação</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">Fluxo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Sequencia (4) ===== -->
+
+                <!-- 13. Seq: Registro de Entrada -->
+                <div class="diagram-card" data-category="sequencia" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(12)">
+                            <img src="images/SequênciaRegistrodeOperaçãodeEntrada.png" alt="Seq: Registro de Entrada" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Seq: Registro de Entrada</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">Sequência</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. Seq: Cautela com Autorizacao -->
+                <div class="diagram-card" data-category="sequencia" data-aos="fade-up" data-aos-delay="50">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(13)">
+                            <img src="images/SequênciaProcessodeCautelacomAutorização.png" alt="Seq: Cautela com Autorizacao" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Seq: Cautela com Autorização</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">Sequência</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Seq: Particionamento Automatico -->
+                <div class="diagram-card" data-category="sequencia" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(14)">
+                            <img src="images/SequênciaSistemadeParticionamentoAutomático.png" alt="Seq: Particionamento Automático" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Seq: Particionamento Automático</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">Sequência</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16. Seq: LISTEN/NOTIFY -->
+                <div class="diagram-card" data-category="sequencia" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(15)">
+                            <img src="images/SequênciaSistemaLISTENNOTIFYparaNotificações.png" alt="Seq: LISTEN/NOTIFY" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Seq: LISTEN/NOTIFY</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">Sequência</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Casos de Uso (4) ===== -->
+
+                <!-- 17. Casos de Uso - Visao Geral -->
+                <div class="diagram-card" data-category="casos" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(16)">
+                            <img src="images/CasosdeUsoPrincipais-VisãoGeral.png" alt="Casos de Uso - Visão Geral" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Casos de Uso - Visão Geral</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300">Casos de Uso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 18. Casos de Uso - Operacoes -->
+                <div class="diagram-card" data-category="casos" data-aos="fade-up" data-aos-delay="50">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(17)">
+                            <img src="images/CasosdeUsoDetalhados-MódulodeOperações.png" alt="Casos de Uso - Operações" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Casos de Uso - Operações</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300">Casos de Uso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 19. Casos de Uso - Consultas -->
+                <div class="diagram-card" data-category="casos" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(18)">
+                            <img src="images/CasosdeUso-MódulodeConsultaseRelatórios.png" alt="Casos de Uso - Consultas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Casos de Uso - Consultas</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300">Casos de Uso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 20. Casos de Uso Criticos -->
+                <div class="diagram-card" data-category="casos" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(19)">
+                            <img src="images/EspecificaçãodeCasosdeUsoCríticos.png" alt="Casos de Uso Críticos" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Casos de Uso Críticos</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300">Casos de Uso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Componentes (1) ===== -->
+
+                <!-- 21. Diagrama de Componentes -->
+                <div class="diagram-card" data-category="componentes" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(20)">
+                            <img src="images/DiagramadeComponentesMódulos.png" alt="Diagrama de Componentes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Diagrama de Componentes</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300">Componentes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== Implantacao (6) ===== -->
+
+                <!-- 22. Arquitetura de Implantacao -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="0">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(21)">
+                            <img src="images/ArquiteturadeImplantaçãoCompleta.png" alt="Arquitetura de Implantação" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Arquitetura de Implantação</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 23. Estrutura de Particionamento -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="50">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(22)">
+                            <img src="images/EstruturadeParticionamentoporTabela.png" alt="Estrutura de Particionamento" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Estrutura de Particionamento</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 24. Estrategia de Particionamento -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(23)">
+                            <img src="images/EstratégiadeParticionamentoporTabela.png" alt="Estratégia de Particionamento" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Estratégia de Particionamento</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 25. Criacao Automatica de Particoes -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(24)">
+                            <img src="images/FluxodeCriaçãoAutomáticadePartições.png" alt="Criacao Automatica de Particoes" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Criação Automática de Partições</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 26. Mapa de Indices -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="200">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(25)">
+                            <img src="images/MapadeÍndicesporTabela.png" alt="Mapa de Índices" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Mapa de Índices</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 27. Otimizacao de Consultas -->
+                <div class="diagram-card" data-category="implantacao" data-aos="fade-up" data-aos-delay="250">
+                    <div class="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                        <div class="relative aspect-[4/3] overflow-hidden cursor-pointer" onclick="openViewer(26)">
+                            <img src="images/EstratégiadeOtimizaçãodeConsultas.png" alt="Otimização de Consultas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/90 text-slate-800 text-xs font-semibold backdrop-blur-sm">
+                                    <i class="fas fa-expand"></i> Ampliar
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Otimização de Consultas</h3>
+                            </div>
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">Implantação</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden py-20 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 mb-4">
+                    <i class="fas fa-search text-2xl"></i>
+                </div>
+                <p class="text-lg font-medium text-slate-500 dark:text-slate-400">Nenhum diagrama encontrado nesta categoria</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+                <!-- Brand -->
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                        <div>
+                            <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400">SIGA</span>
+                            <span class="block text-xs text-slate-500 dark:text-slate-400">Documentação v2.0</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Sistema Integrado de Gestão de Almoxarifado do Corpo de Bombeiros Militar de Mato Grosso.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Navegação</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Início</a></li>
+                        <li><a href="modulos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Módulos</a></li>
+                        <li><a href="arquitetura.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Arquitetura</a></li>
+                        <li><a href="diagramas.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Diagramas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Recursos</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="processos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Processos</a></li>
+                        <li><a href="seguranca.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Segurança</a></li>
+                        <li><a href="downloads.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Contato</h4>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-building w-4 text-center"></i>
+                            CBM-MT - Cuiabá/MT
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-envelope w-4 text-center"></i>
+                            bea@cbm.mt.gov.br
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    &copy; 2025 Corpo de Bombeiros Militar de Mato Grosso. Todos os direitos reservados.
+                </p>
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    Documentação SIGA v2.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="no-print fixed bottom-6 right-6 w-12 h-12 rounded-xl bg-cbm-700 hover:bg-cbm-600 text-white shadow-lg shadow-cbm-700/30 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 z-40">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.3/viewer.min.js"></script>
+    <script src="js/diagrams.js"></script>
+</body>
+</html>

@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos do Sistema - SIGA | CBM-MT</title>
+    <meta name="description" content="Conheça os 6 módulos integrados do SIGA - Configuração, Almoxarifados, Materiais, Operações, Auditoria e Notificações.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cbm: {
+              50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca',
+              300: '#fca5a5', 400: '#f87171', 500: '#ef4444',
+              600: '#dc2626', 700: '#b91c1c', 800: '#991b1b',
+              900: '#7f1d1d', 950: '#450a0a'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="no-print" style="width: 0%"></div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-none transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-18">
+
+                <!-- Brand -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                    <div>
+                        <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400 group-hover:text-cbm-600 transition-colors">SIGA</span>
+                        <span class="hidden sm:block text-xs text-slate-500 dark:text-slate-400 leading-none">Documentação Técnica</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Início</a>
+                    <a href="modulos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-cbm-500 nav-link-active hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Módulos</a>
+                    <a href="arquitetura.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Arquitetura</a>
+                    <a href="diagramas.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Diagramas</a>
+                    <a href="processos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Processos</a>
+                    <a href="seguranca.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Segurança</a>
+                    <a href="downloads.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Downloads</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Alternar tema">
+                        <i id="theme-icon" class="fas fa-sun text-lg"></i>
+                    </button>
+
+                    <!-- Hamburger (mobile) -->
+                    <button id="hamburger" class="lg:hidden hamburger flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden no-print"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 bg-white dark:bg-slate-800 z-50 shadow-2xl lg:hidden no-print">
+        <div class="p-6 pt-20 flex flex-col gap-2">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-home w-5 text-center text-cbm-500"></i> Início
+            </a>
+            <a href="modulos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-cubes w-5 text-center text-cbm-500"></i> Módulos
+            </a>
+            <a href="arquitetura.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-layer-group w-5 text-center text-cbm-500"></i> Arquitetura
+            </a>
+            <a href="diagramas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-project-diagram w-5 text-center text-cbm-500"></i> Diagramas
+            </a>
+            <a href="processos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-sitemap w-5 text-center text-cbm-500"></i> Processos
+            </a>
+            <a href="seguranca.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-shield-alt w-5 text-center text-cbm-500"></i> Segurança
+            </a>
+            <a href="downloads.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-download w-5 text-center text-cbm-500"></i> Downloads
+            </a>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE HEADER ==================== -->
+    <section class="hero-gradient hero-pattern relative pt-24 pb-16 overflow-hidden">
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+
+            <!-- Breadcrumb -->
+            <nav class="mb-6" data-aos="fade-down" data-aos-duration="600">
+                <ol class="flex items-center text-sm text-slate-400">
+                    <li><a href="index.html" class="hover:text-cbm-400 transition-colors">Início</a></li>
+                    <li class="breadcrumb-sep"></li>
+                    <li class="text-cbm-400 font-medium">Módulos</li>
+                </ol>
+            </nav>
+
+            <!-- Title -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4" data-aos="fade-up" data-aos-delay="100">
+                <span class="text-white">Módulos do </span><span class="text-gradient">Sistema</span>
+            </h1>
+
+            <!-- Description -->
+            <p class="max-w-2xl text-lg sm:text-xl text-slate-300 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                Conheça os 6 módulos integrados que compõem o SIGA, cada um projetado para funcionar de forma independente e integrada, cobrindo todo o ciclo de gestão de almoxarifado do CBM-MT.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== STICKY MODULE NAVIGATOR ==================== -->
+    <div class="sticky top-16 z-30 bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50 shadow-lg no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide" style="-webkit-overflow-scrolling: touch;">
+                <button data-scroll-target="configuracao" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-cog text-xs"></i>
+                    <span>Configuração</span>
+                </button>
+                <button data-scroll-target="almoxarifados" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-warehouse text-xs"></i>
+                    <span>Almoxarifados</span>
+                </button>
+                <button data-scroll-target="materiais" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-boxes-stacked text-xs"></i>
+                    <span>Materiais</span>
+                </button>
+                <button data-scroll-target="operacoes" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-exchange-alt text-xs"></i>
+                    <span>Operações</span>
+                </button>
+                <button data-scroll-target="auditoria" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-history text-xs"></i>
+                    <span>Auditoria</span>
+                </button>
+                <button data-scroll-target="notificacoes" class="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 hover:bg-cbm-700 hover:text-white transition-all duration-200">
+                    <i class="fas fa-bell text-xs"></i>
+                    <span>Notificações</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODULE 1: CONFIGURACAO E SEGURANCA ==================== -->
+    <section id="configuracao" class="py-20 bg-white dark:bg-slate-800/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cbm-100 dark:bg-cbm-900/30 text-cbm-600 dark:text-cbm-400">
+                    <i class="fas fa-cog text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-400 mb-2">Módulo 1</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Configuração e Segurança</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        O módulo de Configuração e Segurança é a base fundamental do SIGA, responsável pela estrutura organizacional e controle de acesso. Define a hierarquia do CBM-MT, cadastro de militares por patente e graduação, e o sistema de permissões que garante que cada usuário acesse apenas o que lhe é permitido.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+
+                <!-- Entity: unidade_cbm -->
+                <div class="card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-cbm-400 text-sm font-mono font-medium">unidade_cbm</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Estrutura hierárquica das unidades do CBM-MT com comandante, endereço e subordinação. Representa quartéis, subestações e bases operacionais.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-cbm-500 w-3"></i> <span class="font-mono">id_unidade</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-font w-3 text-slate-400"></i> <span class="font-mono">nome, sigla</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_comandante</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-sitemap w-3 text-slate-400"></i> <span class="font-mono">id_unidade_pai</span> <span class="text-slate-400">FK (self)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt w-3 text-slate-400"></i> <span class="font-mono">endereco, cidade, uf</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: militar -->
+                <div class="card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-cbm-400 text-sm font-mono font-medium">militar</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Cadastro de militares com dados pessoais, funcionais, patente, graduação e unidade de lotação. Base para autenticação e rastreabilidade.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-cbm-500 w-3"></i> <span class="font-mono">id_militar</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-id-badge w-3 text-slate-400"></i> <span class="font-mono">matricula, cpf</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-medal w-3 text-slate-400"></i> <span class="font-mono">patente, graduacao</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_unidade</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-lock w-3 text-slate-400"></i> <span class="font-mono">senha_hash, ultimo_acesso</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: perfil_acesso -->
+                <div class="card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-cbm-400 text-sm font-mono font-medium">perfil_acesso</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Perfis de permissão configuráveis por módulo e operação com controle granular. Define o que cada militar pode visualizar, criar, editar ou excluir.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-cbm-500 w-3"></i> <span class="font-mono">id_perfil</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-font w-3 text-slate-400"></i> <span class="font-mono">nome, descricao</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-th w-3 text-slate-400"></i> <span class="font-mono">modulo, operacao</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-toggle-on w-3 text-slate-400"></i> <span class="font-mono">pode_ler, pode_criar</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-toggle-on w-3 text-slate-400"></i> <span class="font-mono">pode_editar, pode_excluir</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-cbm-600 bg-cbm-900/10 dark:bg-cbm-900/20 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-cbm-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-cbm-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Acesso baseado em hierarquia militar (RBAC) - cada patente tem nível de acesso pré-definido</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-cbm-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Cada unidade tem um comandante responsável, que herda permissões sobre unidades subordinadas</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-cbm-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Permissões configuráveis por módulo e tipo de operação (CRUD granular)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-cbm-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Sessões com timeout configurável e registro de IP para auditoria de acesso</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#configuracao" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Classes Principais - Módulo de Configuração
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ==================== MODULE 2: GESTAO DE ALMOXARIFADOS ==================== -->
+    <section id="almoxarifados" class="py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+                    <i class="fas fa-warehouse text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 mb-2">Módulo 2</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Gestão de Almoxarifados</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        Gerencia os almoxarifados físicos do CBM-MT, suas localizações internas e o controle de estoque em tempo real. Cada unidade pode ter um ou mais almoxarifados, com sistema de localização hierárquico que permite rastrear qualquer material até sua posição exata.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+
+                <!-- Entity: almoxarifado -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-amber-400 text-sm font-mono font-medium">almoxarifado</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Depósitos com tipo (principal, auxiliar, temporário), capacidade, área e responsável. Cada almoxarifado é vinculado a uma unidade CBM.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-amber-500 w-3"></i> <span class="font-mono">id_almoxarifado</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-font w-3 text-slate-400"></i> <span class="font-mono">nome, tipo</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_unidade</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-ruler-combined w-3 text-slate-400"></i> <span class="font-mono">area_m2, capacidade</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user w-3 text-slate-400"></i> <span class="font-mono">id_responsavel</span> <span class="text-slate-400">FK</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: localizacao -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-amber-400 text-sm font-mono font-medium">localizacao</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Sistema hierárquico de localização interna: setor, corredor, prateleira, nível e posição. Permite rastreamento preciso de cada item armazenado.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-amber-500 w-3"></i> <span class="font-mono">id_localizacao</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_almoxarifado</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-pin w-3 text-slate-400"></i> <span class="font-mono">setor, corredor</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-layer-group w-3 text-slate-400"></i> <span class="font-mono">prateleira, nivel</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-crosshairs w-3 text-slate-400"></i> <span class="font-mono">posicao, codigo</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: estoque_atual -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-amber-400 text-sm font-mono font-medium">estoque_atual</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Quantidade real por material e localização com lote, validade e status. Atualizado automaticamente por triggers após cada movimentação.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-amber-500 w-3"></i> <span class="font-mono">id_estoque</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_material, id_localizacao</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-calculator w-3 text-slate-400"></i> <span class="font-mono">quantidade, un_medida</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-barcode w-3 text-slate-400"></i> <span class="font-mono">lote, validade</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-info-circle w-3 text-slate-400"></i> <span class="font-mono">status</span> <span class="text-slate-400">(disponível, reservado, vencido)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-amber-500 bg-amber-900/10 dark:bg-amber-900/15 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-amber-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Cada almoxarifado pertence a uma unidade CBM e possui um militar responsável designado</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Localizações hierárquicas permitem rastreamento preciso até a posição individual</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Estoque atualizado automaticamente por triggers do PostgreSQL após cada movimentação</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Alertas automáticos de capacidade máxima e estoque mínimo configurável por material</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#almoxarifados" class="inline-flex items-center gap-2 text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Classes Principais - Módulo de Almoxarifados
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ==================== MODULE 3: CATALOGO DE MATERIAIS ==================== -->
+    <section id="materiais" class="py-20 bg-white dark:bg-slate-800/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                    <i class="fas fa-boxes-stacked text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 mb-2">Módulo 3</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Catálogo de Materiais</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        O catálogo de materiais utiliza uma estrutura polimórfica que permite gerenciar desde itens de consumo simples até viaturas complexas, mantendo uma interface unificada. A categorização dinâmica e hierárquica facilita a organização e busca de qualquer item.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid (6 cards, 2x3) -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+
+                <!-- Entity: categoria_material -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">categoria_material</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Categorização dinâmica e hierárquica com código, nível e categoria pai. Permite árvore ilimitada de subcategorias.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-blue-500 w-3"></i> <span class="font-mono">id_categoria</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-sitemap w-3 text-slate-400"></i> <span class="font-mono">codigo, nivel, id_pai</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: material_base -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="50">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">material_base</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Informações centrais: código, nome, categoria, unidade de medida, estoque mínimo e máximo. Tabela pai na herança polimórfica.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-blue-500 w-3"></i> <span class="font-mono">id_material</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-tag w-3 text-slate-400"></i> <span class="font-mono">codigo, nome, tipo</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-chart-bar w-3 text-slate-400"></i> <span class="font-mono">estoque_min, estoque_max</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: material_consumo -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">material_consumo</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Itens consumíveis com controle de validade, lote, contrato e número de doação. Quantidade decrementada automaticamente no uso.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-link text-blue-500 w-3"></i> <span class="font-mono">id_material</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-calendar-alt w-3 text-slate-400"></i> <span class="font-mono">validade, lote</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-file-contract w-3 text-slate-400"></i> <span class="font-mono">contrato, nr_doacao</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: material_permanente -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="150">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">material_permanente</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Itens permanentes com número de patrimônio e rastreamento de ocorrências. Exige placa de identificação e controle individual.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-link text-blue-500 w-3"></i> <span class="font-mono">id_material</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-hashtag w-3 text-slate-400"></i> <span class="font-mono">nr_patrimonio</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-clipboard-list w-3 text-slate-400"></i> <span class="font-mono">ocorrencias, estado</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: equipamento -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">equipamento</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Equipamentos especializados com número de série, especificações técnicas e histórico de manutenção. Inclui EPIs e equipamentos de combate.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-link text-blue-500 w-3"></i> <span class="font-mono">id_material</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-barcode w-3 text-slate-400"></i> <span class="font-mono">nr_serie, fabricante</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-wrench w-3 text-slate-400"></i> <span class="font-mono">ultima_manutencao</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: viatura -->
+                <div class="card-hover p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="250">
+                    <div class="mb-3">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-slate-700/50 text-blue-400 text-xs font-mono font-medium">viatura</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                        Veículos com placa, chassi, quilometragem e tipo (combate, resgate, transporte, comando). Controle de manutenção preventiva e corretiva.
+                    </p>
+                    <ul class="space-y-1 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-link text-blue-500 w-3"></i> <span class="font-mono">id_material</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-car w-3 text-slate-400"></i> <span class="font-mono">placa, chassi, tipo</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-tachometer-alt w-3 text-slate-400"></i> <span class="font-mono">km_atual, prox_manutencao</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-blue-500 bg-blue-900/10 dark:bg-blue-900/15 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-blue-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-blue-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Itens permanentes devem ser patrimoniados com placa de identificação e número único</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-blue-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Consumíveis com validade exigem lote e data de vencimento obrigatórios</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-blue-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Viaturas: manutenção preventiva obrigatória a cada 10.000km ou 6 meses (o que ocorrer primeiro)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-blue-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Equipamentos de combate: inspeção mensal obrigatória durante período operacional (junho a dezembro)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#materiais" class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Herança Polimórfica - Catálogo de Materiais
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ==================== MODULE 4: OPERACOES E MOVIMENTACOES ==================== -->
+    <section id="operacoes" class="py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+                    <i class="fas fa-exchange-alt text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 mb-2">Módulo 4</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Operações e Movimentações</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        Módulo central do SIGA que registra todas as operações de movimentação de materiais. Cada operação gera automaticamente uma ou mais movimentações que atualizam o estoque, disparam notificações e criam registros de auditoria.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+
+                <!-- Entity: operacao -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-emerald-400 text-sm font-mono font-medium">operacao</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Todas as transações: entrada, saída, transferência, cautela, devolução e manutenção. Registra solicitante, autorizador e status do fluxo.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-emerald-500 w-3"></i> <span class="font-mono">id_operacao</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-tags w-3 text-slate-400"></i> <span class="font-mono">tipo</span> <span class="text-slate-400">(ENUM)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user w-3 text-slate-400"></i> <span class="font-mono">id_solicitante, id_autorizador</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-flag w-3 text-slate-400"></i> <span class="font-mono">status</span> <span class="text-slate-400">(pendente, aprovada, rejeitada)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-comment w-3 text-slate-400"></i> <span class="font-mono">observacao, justificativa</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: movimentacao -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-emerald-400 text-sm font-mono font-medium">movimentacao</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Movimentos individuais gerados por operações com material, quantidade e localização. Cada operação pode gerar múltiplas movimentações atômicas.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-emerald-500 w-3"></i> <span class="font-mono">id_movimentacao</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_operacao</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-box w-3 text-slate-400"></i> <span class="font-mono">id_material, quantidade</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-pin w-3 text-slate-400"></i> <span class="font-mono">id_loc_origem, id_loc_destino</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-clock w-3 text-slate-400"></i> <span class="font-mono">data_hora, confirmado</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: transferencia_custodia -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-emerald-400 text-sm font-mono font-medium">transferencia_custodia</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Transferência de responsabilidade em campo entre militares durante operações. Registra cedente, recebedor e termos de responsabilidade.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-emerald-500 w-3"></i> <span class="font-mono">id_transferencia</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_operacao</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user-friends w-3 text-slate-400"></i> <span class="font-mono">id_cedente, id_recebedor</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-marked-alt w-3 text-slate-400"></i> <span class="font-mono">local_campo, coordenadas</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-file-signature w-3 text-slate-400"></i> <span class="font-mono">termo_assinado</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-emerald-500 bg-emerald-900/10 dark:bg-emerald-900/15 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-emerald-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Toda saída de material requer autorização do responsável do almoxarifado de origem</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Cautela padrão: 15 dias, prorrogável por mais 15 com justificativa e aprovação do comandante</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Cautelas com mais de 30 dias devem ser convertidas em transferência temporária com termo formal</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-emerald-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Sistema notifica automaticamente o administrador sobre itens pendentes de devolução</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#operacoes" class="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Fluxo de Operações e Movimentações
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ==================== MODULE 5: HISTORICO E AUDITORIA ==================== -->
+    <section id="auditoria" class="py-20 bg-white dark:bg-slate-800/30">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                    <i class="fas fa-history text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 mb-2">Módulo 5</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Histórico e Auditoria</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        O sistema de auditoria é a espinha dorsal da conformidade do SIGA. Registra automaticamente cada ação realizada no sistema com detalhes completos, permitindo reconstruir qualquer operação e garantindo total transparência.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid (2 cards) -->
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+
+                <!-- Entity: log_auditoria -->
+                <div class="card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-purple-400 text-sm font-mono font-medium">log_auditoria</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Registro completo de todas as ações: quem executou, o que foi feito, quando ocorreu, IP de origem, dados anteriores e posteriores armazenados em JSONB. Tabela particionada mensalmente para desempenho ótimo.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-purple-500 w-3"></i> <span class="font-mono">id_log</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user w-3 text-slate-400"></i> <span class="font-mono">id_militar</span> <span class="text-slate-400">FK (quem)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-cogs w-3 text-slate-400"></i> <span class="font-mono">acao, tabela_afetada</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-code w-3 text-slate-400"></i> <span class="font-mono">dados_antes</span> <span class="text-slate-400">JSONB</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-code w-3 text-slate-400"></i> <span class="font-mono">dados_depois</span> <span class="text-slate-400">JSONB</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-globe w-3 text-slate-400"></i> <span class="font-mono">ip_origem, user_agent</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-clock w-3 text-slate-400"></i> <span class="font-mono">created_at</span> <span class="text-slate-400">(particionado)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: historico_estoque -->
+                <div class="card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-purple-400 text-sm font-mono font-medium">historico_estoque</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Snapshots do estoque ao longo do tempo para análise e comparação. Permite reconstruir o estado do estoque em qualquer ponto do passado. Particionamento semestral para balancear volume e consulta.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-purple-500 w-3"></i> <span class="font-mono">id_historico</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_material, id_almoxarifado</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-calculator w-3 text-slate-400"></i> <span class="font-mono">qtd_anterior, qtd_posterior</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-link w-3 text-slate-400"></i> <span class="font-mono">id_movimentacao</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-camera w-3 text-slate-400"></i> <span class="font-mono">snapshot_data</span> <span class="text-slate-400">JSONB</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-clock w-3 text-slate-400"></i> <span class="font-mono">data_registro</span> <span class="text-slate-400">(particionado)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-purple-500 bg-purple-900/10 dark:bg-purple-900/15 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-purple-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-purple-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Retenção: 5 anos no banco de dados ativo, 10 anos em arquivo externo compactado</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-purple-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Particionamento mensal automático via pg_cron para manutenção zero de desempenho</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-purple-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Dados de auditoria são imutáveis - tabela com política somente INSERT, sem UPDATE ou DELETE</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-purple-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Exportação automática de partições antigas para armazenamento de longo prazo com compressão</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#auditoria" class="inline-flex items-center gap-2 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Modelo de Auditoria e Particionamento
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- ==================== MODULE 6: NOTIFICACOES ==================== -->
+    <section id="notificacoes" class="py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+            <!-- Module Header -->
+            <div class="flex items-start gap-5 mb-10" data-aos="fade-up">
+                <div class="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400">
+                    <i class="fas fa-bell text-2xl"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 mb-2">Módulo 6</span>
+                    <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-3">Notificações</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        Sistema inteligente de notificações em tempo real que utiliza o mecanismo nativo LISTEN/NOTIFY do PostgreSQL. Elimina a necessidade de polling, oferecendo alertas instantâneos para eventos críticos como estoque mínimo, vencimentos e cautelas atrasadas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Entities Grid (2 cards) -->
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+
+                <!-- Entity: notificacao -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-orange-400 text-sm font-mono font-medium">notificacao</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Alertas do sistema com tipo, prioridade, destinatário e status de leitura. Particionada mensalmente para performance. Suporta notificações em massa para grupos de usuários.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-orange-500 w-3"></i> <span class="font-mono">id_notificacao</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-tags w-3 text-slate-400"></i> <span class="font-mono">tipo</span> <span class="text-slate-400">(estoque, vencimento, cautela, sistema)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-exclamation-triangle w-3 text-slate-400"></i> <span class="font-mono">prioridade</span> <span class="text-slate-400">(baixa, média, alta, crítica)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user w-3 text-slate-400"></i> <span class="font-mono">id_destinatario</span> <span class="text-slate-400">FK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-envelope-open w-3 text-slate-400"></i> <span class="font-mono">lida, data_leitura</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-align-left w-3 text-slate-400"></i> <span class="font-mono">titulo, mensagem</span></li>
+                    </ul>
+                </div>
+
+                <!-- Entity: evento_operacional -->
+                <div class="card-hover p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1.5 rounded-lg bg-slate-700/50 text-orange-400 text-sm font-mono font-medium">evento_operacional</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
+                        Eventos como incêndios, campanhas e atividades com vinculação de materiais utilizados. Permite rastrear o consumo de materiais por ocorrência para prestação de contas.
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                        <li class="flex items-center gap-2"><i class="fas fa-key text-orange-500 w-3"></i> <span class="font-mono">id_evento</span> <span class="text-slate-400">PK</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-fire w-3 text-slate-400"></i> <span class="font-mono">tipo_evento</span> <span class="text-slate-400">(incêndio, resgate, prevenção)</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt w-3 text-slate-400"></i> <span class="font-mono">localizacao, coordenadas</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-calendar-alt w-3 text-slate-400"></i> <span class="font-mono">data_inicio, data_fim</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-boxes-stacked w-3 text-slate-400"></i> <span class="font-mono">materiais_utilizados</span> <span class="text-slate-400">JSONB</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-user-friends w-3 text-slate-400"></i> <span class="font-mono">equipe_responsavel</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Business Rules Callout -->
+            <div class="callout border-orange-500 bg-orange-900/10 dark:bg-orange-900/15 rounded-r-xl" data-aos="fade-left">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-gavel text-orange-500"></i>
+                    <h4 class="text-base font-semibold text-slate-900 dark:text-white">Regras de Negócio</h4>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-orange-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Triggers do PostgreSQL disparam notificações automaticamente via LISTEN/NOTIFY</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-orange-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Tipos automáticos: estoque mínimo, vencimento próximo (30/15/7 dias), cautela atrasada, operação pendente</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-orange-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Integração com e-mail para alertas de prioridade crítica com template padronizado</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-orange-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Dashboard de notificações não lidas por perfil com contadores em tempo real</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Related Diagram Link -->
+            <div class="mt-6 flex items-center gap-2" data-aos="fade-up" data-aos-delay="100">
+                <a href="diagramas.html#notificacoes" class="inline-flex items-center gap-2 text-sm font-medium text-orange-600 dark:text-orange-400 hover:text-orange-500 transition-colors">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver diagrama: Fluxo de Notificações e Eventos
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-cbm-800 via-cbm-900 to-slate-900"></div>
+        <div class="absolute inset-0 hero-pattern opacity-50"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4" data-aos="fade-up">
+                Explore a arquitetura e os diagramas
+            </h2>
+            <p class="text-lg text-slate-300 mb-10 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Veja como os 6 módulos se conectam através dos diagramas técnicos, processos de negócio e a arquitetura completa do sistema SIGA.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="arquitetura.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-cbm-800 font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                    <i class="fas fa-layer-group"></i>
+                    Ver Arquitetura
+                </a>
+                <a href="diagramas.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:-translate-y-0.5">
+                    <i class="fas fa-project-diagram"></i>
+                    Ver Diagramas
+                </a>
+                <a href="processos.html" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:-translate-y-0.5">
+                    <i class="fas fa-sitemap"></i>
+                    Ver Processos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+                <!-- Brand -->
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                        <div>
+                            <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400">SIGA</span>
+                            <span class="block text-xs text-slate-500 dark:text-slate-400">Documentação v2.0</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Sistema Integrado de Gestão de Almoxarifado do Corpo de Bombeiros Militar de Mato Grosso.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Navegação</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Início</a></li>
+                        <li><a href="modulos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Módulos</a></li>
+                        <li><a href="arquitetura.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Arquitetura</a></li>
+                        <li><a href="diagramas.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Diagramas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Recursos</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="processos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Processos</a></li>
+                        <li><a href="seguranca.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Segurança</a></li>
+                        <li><a href="downloads.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Contato</h4>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-building w-4 text-center"></i>
+                            CBM-MT - Cuiabá/MT
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-envelope w-4 text-center"></i>
+                            bea@cbm.mt.gov.br
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    &copy; 2025 Corpo de Bombeiros Militar de Mato Grosso. Todos os direitos reservados.
+                </p>
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    Documentação SIGA v2.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="no-print fixed bottom-6 right-6 w-12 h-12 rounded-xl bg-cbm-700 hover:bg-cbm-600 text-white shadow-lg shadow-cbm-700/30 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 z-40">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

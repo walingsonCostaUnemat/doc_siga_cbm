@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processos de Negócio - SIGA | CBM-MT</title>
+    <meta name="description" content="Fluxos operacionais detalhados do SIGA - Processos de entrada, saída, transferência, custódia e ocorrências">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cbm: {
+              50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca',
+              300: '#fca5a5', 400: '#f87171', 500: '#ef4444',
+              600: '#dc2626', 700: '#b91c1c', 800: '#991b1b',
+              900: '#7f1d1d', 950: '#450a0a'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="no-print" style="width: 0%"></div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-none transition-all duration-300 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-18">
+
+                <!-- Brand -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                    <div>
+                        <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400 group-hover:text-cbm-600 transition-colors">SIGA</span>
+                        <span class="hidden sm:block text-xs text-slate-500 dark:text-slate-400 leading-none">Documentação Técnica</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Início</a>
+                    <a href="modulos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Módulos</a>
+                    <a href="arquitetura.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Arquitetura</a>
+                    <a href="diagramas.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Diagramas</a>
+                    <a href="processos.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-cbm-500 nav-link-active hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Processos</a>
+                    <a href="seguranca.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Segurança</a>
+                    <a href="downloads.html" class="nav-link-item px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cbm-600 dark:hover:text-cbm-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">Downloads</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Alternar tema">
+                        <i id="theme-icon" class="fas fa-sun text-lg"></i>
+                    </button>
+
+                    <!-- Hamburger (mobile) -->
+                    <button id="hamburger" class="lg:hidden hamburger flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden no-print"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 bg-white dark:bg-slate-800 z-50 shadow-2xl lg:hidden no-print">
+        <div class="p-6 pt-20 flex flex-col gap-2">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-home w-5 text-center text-cbm-500"></i> Início
+            </a>
+            <a href="modulos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-cubes w-5 text-center text-cbm-500"></i> Módulos
+            </a>
+            <a href="arquitetura.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-layer-group w-5 text-center text-cbm-500"></i> Arquitetura
+            </a>
+            <a href="diagramas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-project-diagram w-5 text-center text-cbm-500"></i> Diagramas
+            </a>
+            <a href="processos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-sitemap w-5 text-center text-cbm-500"></i> Processos
+            </a>
+            <a href="seguranca.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-shield-alt w-5 text-center text-cbm-500"></i> Segurança
+            </a>
+            <a href="downloads.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors font-medium">
+                <i class="fas fa-download w-5 text-center text-cbm-500"></i> Downloads
+            </a>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE HEADER ==================== -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-30"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6" data-aos="fade-right">
+                <a href="index.html" class="hover:text-cbm-400 transition-colors">Início</a>
+                <i class="fas fa-chevron-right text-xs text-slate-600"></i>
+                <span class="text-slate-200">Processos</span>
+            </nav>
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4" data-aos="fade-up">
+                Processos de <span class="text-cbm-400">Negócio</span>
+            </h1>
+            <p class="text-lg text-slate-300 max-w-3xl leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                Fluxos operacionais detalhados do SIGA com atores, etapas e regras
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== PROCESS SELECTOR ==================== -->
+    <section class="py-10 bg-white dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" data-aos="fade-up">
+
+                <!-- Entrada -->
+                <button data-process="entrada" class="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-cbm-500 dark:border-cbm-500 bg-cbm-50 dark:bg-cbm-900/20 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-arrow-down text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Entrada de Material</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">7 etapas</span>
+                    </div>
+                </button>
+
+                <!-- Cautela -->
+                <button data-process="cautela" class="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                    <div class="w-12 h-12 rounded-xl bg-cbm-100 dark:bg-cbm-900/40 flex items-center justify-center text-cbm-600 dark:text-cbm-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-arrow-up text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Saída / Cautela</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">8 etapas</span>
+                    </div>
+                </button>
+
+                <!-- Transferencia -->
+                <button data-process="transferencia" class="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-exchange-alt text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Transferência</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">6 etapas</span>
+                    </div>
+                </button>
+
+                <!-- Custodia -->
+                <button data-process="custodia" class="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-hands-holding text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Custódia em Campo</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">5 etapas</span>
+                    </div>
+                </button>
+
+                <!-- Ocorrencia -->
+                <button data-process="ocorrencia" class="group flex flex-col items-center gap-3 p-5 rounded-2xl border-2 border-slate-200 dark:border-slate-700 cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 col-span-2 sm:col-span-1">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-exclamation-triangle text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-tight">Registro de Ocorrência</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">5 etapas</span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROCESS CONTENT AREA ==================== -->
+    <section class="py-16 bg-slate-50 dark:bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- ===== P1: ENTRADA DE MATERIAL ===== -->
+            <div data-process-panel="entrada">
+                <div class="grid lg:grid-cols-5 gap-10">
+
+                    <!-- Left: Timeline (60%) -->
+                    <div class="lg:col-span-3">
+                        <div class="mb-8">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 mb-3">
+                                <i class="fas fa-arrow-down"></i> Processo de Entrada
+                            </span>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">Entrada de Material</h2>
+                            <p class="text-slate-500 dark:text-slate-400 mt-2">Fluxo completo desde o recebimento físico até a atualização automática do estoque.</p>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Step 1 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    1
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Receber material e documentação</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O almoxarife recebe o material junto com nota fiscal, guia de remessa ou documento de doação. Verifica se o pedido corresponde ao esperado.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    2
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Verificar conformidade</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Conferência física: quantidade, estado, especificações técnicas. Para materiais com validade, verifica lote e data de vencimento.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    3
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Registrar operação no sistema</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Cria a operação de entrada informando: material, quantidade, fornecedor, documento fiscal, almoxarifado e localização destino.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    4
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Validar e gerar número</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O sistema valida os dados, verifica duplicidade, gera número único de operação e confirma disponibilidade de espaço na localização.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    5
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Armazenar no local designado</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O material é fisicamente armazenado na localização indicada. Para itens permanentes, é feita a identificação patrimonial.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 6 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    6
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Atualizar estoque automaticamente</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Triggers do PostgreSQL atualizam a tabela estoque_atual, registram no histórico e verificam se atingiu estoque máximo.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 7 (last - no line) -->
+                            <div class="relative flex gap-6 pb-4">
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    7
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Notificar e registrar auditoria</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema gera recibo, dispara notificações relevantes e cria registro completo no log de auditoria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Panel (40%) -->
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24 space-y-6">
+                            <!-- Diagram Thumbnail -->
+                            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group">
+                                <a href="diagramas.html" class="block relative">
+                                    <img src="images/ProcessodeEntradadeMaterial.png" alt="Diagrama - Entrada de Material" class="w-full h-auto group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                        <span class="text-white text-sm font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">Processo de Entrada de Material</span>
+                                        <span class="text-white bg-cbm-600/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                                            <i class="fas fa-expand-alt mr-1"></i> Ampliar
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Info Card -->
+                            <div class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-4">Resumo do Processo</h3>
+
+                                <!-- Actors -->
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Atores envolvidos</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Main Rule -->
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Regra principal</span>
+                                    <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/40">
+                                        <p class="text-sm text-emerald-800 dark:text-emerald-300 leading-relaxed">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Todo material recebido deve ter documento fiscal vinculado. Estoque é atualizado automaticamente via triggers do banco.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Related Diagram Link -->
+                                <a href="diagramas.html" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-700 dark:hover:text-cbm-300 transition-colors">
+                                    <i class="fas fa-project-diagram"></i>
+                                    Ver diagrama relacionado
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== P2: SAIDA / CAUTELA ===== -->
+            <div data-process-panel="cautela" class="hidden">
+                <div class="grid lg:grid-cols-5 gap-10">
+
+                    <!-- Left: Timeline -->
+                    <div class="lg:col-span-3">
+                        <div class="mb-8">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-400 mb-3">
+                                <i class="fas fa-arrow-up"></i> Processo de Saída
+                            </span>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">Saída / Cautela</h2>
+                            <p class="text-slate-500 dark:text-slate-400 mt-2">Fluxo completo desde a solicitação do militar até a entrega com termo de cautela.</p>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Step 1 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    1
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Militar solicita material</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O militar identifica o material necessário e cria uma solicitação no sistema informando quantidade, justificativa e prazo previsto.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    2
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Verificar disponibilidade</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema consulta estoque_atual para confirmar que há quantidade suficiente no almoxarifado solicitado.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    3
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Analisar solicitação</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O almoxarife avalia a solicitação, verifica a justificativa e decide se processa ou solicita informações adicionais.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-cbm-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    4
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Obter autorização hierárquica</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">
+                                            <i class="fas fa-star text-[10px]"></i> Comandante
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Para itens de alto valor ou quantidade significativa, o comandante da unidade recebe notificação e aprova ou rejeita.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    5
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Gerar Termo de Cautela</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema gera o Termo de Cautela com: material, quantidade, responsável, prazo de devolução (15 dias padrão) e condições.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 6 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    6
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Entregar material com assinatura</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Almoxarife entrega o material e coleta assinatura digital do militar receptor. Registra condição do material na saída.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 7 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    7
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Agendar alerta de devolução</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema cria agendamento para notificar 3 dias antes do vencimento da cautela e no dia do vencimento.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 8 (last) -->
+                            <div class="relative flex gap-6 pb-4">
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    8
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Atualizar estoque</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Triggers decrementam estoque_atual, registram movimentação e disparam notificação se atingir estoque mínimo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Panel -->
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24 space-y-6">
+                            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group">
+                                <a href="diagramas.html" class="block relative">
+                                    <img src="images/ProcessodeSa%C3%ADdadeMaterialCautela.png" alt="Diagrama - Saída de Material / Cautela" class="w-full h-auto group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                        <span class="text-white text-sm font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">Processo de Saída / Cautela</span>
+                                        <span class="text-white bg-cbm-600/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                                            <i class="fas fa-expand-alt mr-1"></i> Ampliar
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-4">Resumo do Processo</h3>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Atores envolvidos</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">
+                                            <i class="fas fa-star text-[10px]"></i> Comandante
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Regra principal</span>
+                                    <div class="p-3 rounded-xl bg-cbm-50 dark:bg-cbm-900/20 border border-cbm-200 dark:border-cbm-800/40">
+                                        <p class="text-sm text-cbm-800 dark:text-cbm-300 leading-relaxed">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Itens de alto valor exigem autorização do comandante. Cautela padrão de 15 dias com notificação automática de vencimento.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <a href="diagramas.html" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-700 dark:hover:text-cbm-300 transition-colors">
+                                    <i class="fas fa-project-diagram"></i>
+                                    Ver diagrama relacionado
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== P3: TRANSFERENCIA ===== -->
+            <div data-process-panel="transferencia" class="hidden">
+                <div class="grid lg:grid-cols-5 gap-10">
+
+                    <!-- Left: Timeline -->
+                    <div class="lg:col-span-3">
+                        <div class="mb-8">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 mb-3">
+                                <i class="fas fa-exchange-alt"></i> Processo de Transferência
+                            </span>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">Transferência entre Almoxarifados</h2>
+                            <p class="text-slate-500 dark:text-slate-400 mt-2">Fluxo completo de movimentação de material entre almoxarifados do CBM-MT.</p>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Step 1 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    1
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Iniciar transferência</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Almoxarife de origem cria operação de transferência informando material, quantidade, almoxarifado destino e justificativa.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    2
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Validar estoque de origem</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema confirma disponibilidade na origem e capacidade no destino. Verifica se o material é transferível.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    3
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Dar baixa na origem</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Estoque decrementado na origem com status 'em trânsito'. Movimentação registrada.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    4
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Transportar material</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Material é embalado, etiquetado com código de transferência e transportado ao destino.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    5
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Confirmar recebimento</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Almoxarife de destino confirma recebimento, verifica condição e registra no sistema.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 6 (last) -->
+                            <div class="relative flex gap-6 pb-4">
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    6
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Efetivar no destino</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Estoque incrementado no destino, status atualizado para 'concluída', auditoria registrada em ambos almoxarifados.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Panel -->
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24 space-y-6">
+                            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group">
+                                <a href="diagramas.html" class="block relative">
+                                    <img src="images/FluxodeDadoseComunica%C3%A7%C3%A3o.png" alt="Diagrama - Fluxo de Dados e Comunicação" class="w-full h-auto group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                        <span class="text-white text-sm font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">Fluxo de Dados e Comunicação</span>
+                                        <span class="text-white bg-cbm-600/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                                            <i class="fas fa-expand-alt mr-1"></i> Ampliar
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-4">Resumo do Processo</h3>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Atores envolvidos</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                                            <i class="fas fa-database text-[10px]"></i> Trigger/DB
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Regra principal</span>
+                                    <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/40">
+                                        <p class="text-sm text-blue-800 dark:text-blue-300 leading-relaxed">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Material fica com status 'em trânsito' até confirmação do destino. Auditoria registrada em ambos almoxarifados.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <a href="diagramas.html" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-700 dark:hover:text-cbm-300 transition-colors">
+                                    <i class="fas fa-project-diagram"></i>
+                                    Ver diagrama relacionado
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== P4: CUSTODIA EM CAMPO ===== -->
+            <div data-process-panel="custodia" class="hidden">
+                <div class="grid lg:grid-cols-5 gap-10">
+
+                    <!-- Left: Timeline -->
+                    <div class="lg:col-span-3">
+                        <div class="mb-8">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 mb-3">
+                                <i class="fas fa-hands-holding"></i> Transferência de Custódia
+                            </span>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">Custódia em Campo</h2>
+                            <p class="text-slate-500 dark:text-slate-400 mt-2">Transferência de responsabilidade entre militares durante operações em campo.</p>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Step 1 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    1
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Avaliar condição do material</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">O militar detentor avalia e fotografa o material antes da transferência. Registra estado atual no sistema.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    2
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Registrar transferência</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Cria registro informando: material, receptor, motivo (operação, evento, necessidade) e observações.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    3
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Verificar custódia original</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema confirma que o militar é o detentor atual e que a cautela está ativa. Valida permissões do receptor.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    4
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Atualizar responsável</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Altera o responsável pela custódia mantendo o vínculo com a cautela original. Registra cadeia de custódia.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 (last) -->
+                            <div class="relative flex gap-6 pb-4">
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    5
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Notificar almoxarifado</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Almoxarifado central é notificado da transferência em campo. Log de auditoria registra toda a cadeia.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Panel -->
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24 space-y-6">
+                            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group">
+                                <a href="diagramas.html" class="block relative">
+                                    <img src="images/FluxodeDadoseComunica%C3%A7%C3%A3o.png" alt="Diagrama - Fluxo de Dados e Comunicação" class="w-full h-auto group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                        <span class="text-white text-sm font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">Fluxo de Dados e Comunicação</span>
+                                        <span class="text-white bg-cbm-600/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                                            <i class="fas fa-expand-alt mr-1"></i> Ampliar
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-4">Resumo do Processo</h3>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Atores envolvidos</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Regra principal</span>
+                                    <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/40">
+                                        <p class="text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            A cadeia de custódia é mantida vinculada à cautela original. Almoxarifado central é sempre notificado de transferências em campo.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <a href="diagramas.html" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-700 dark:hover:text-cbm-300 transition-colors">
+                                    <i class="fas fa-project-diagram"></i>
+                                    Ver diagrama relacionado
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== P5: REGISTRO DE OCORRENCIA ===== -->
+            <div data-process-panel="ocorrencia" class="hidden">
+                <div class="grid lg:grid-cols-5 gap-10">
+
+                    <!-- Left: Timeline -->
+                    <div class="lg:col-span-3">
+                        <div class="mb-8">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 mb-3">
+                                <i class="fas fa-exclamation-triangle"></i> Registro de Ocorrência
+                            </span>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">Registro de Ocorrência</h2>
+                            <p class="text-slate-500 dark:text-slate-400 mt-2">Fluxo para documentar danos, perdas, defeitos ou extravios de material.</p>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Step 1 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    1
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Identificar ocorrência</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Militar identifica problema com material: dano, perda, defeito de fabricação, extravio. Registra imediatamente.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    2
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Documentar com evidências</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Anexa fotos, descrição detalhada, circunstâncias e testemunhas. Para perda, incluir boletim de ocorrência.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    3
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Encaminhar para avaliação</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sistema roteia para comissão de avaliação ou responsável conforme tipo e valor do material.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative flex gap-6 pb-8">
+                                <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-600"></div>
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-cbm-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    4
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Emitir parecer e decisão</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">
+                                            <i class="fas fa-star text-[10px]"></i> Comandante
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Avaliação técnica determina: reparo, substituição, baixa patrimonial ou ressarcimento.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 (last) -->
+                            <div class="relative flex gap-6 pb-4">
+                                <div class="relative z-10 flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                                    5
+                                </div>
+                                <div class="flex-1 pb-2">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Executar decisão e registrar</h4>
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Ação executada conforme parecer. Sistema atualiza status do material, registra auditoria e arquiva processo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Panel -->
+                    <div class="lg:col-span-2">
+                        <div class="sticky top-24 space-y-6">
+                            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group">
+                                <a href="diagramas.html" class="block relative">
+                                    <img src="images/Sequ%C3%AAnciaRegistrodeOpera%C3%A7%C3%A3odeEntrada.png" alt="Diagrama - Sequência de Registro de Operação" class="w-full h-auto group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                        <span class="text-white text-sm font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">Sequência de Registro de Operação</span>
+                                        <span class="text-white bg-cbm-600/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg text-xs font-medium">
+                                            <i class="fas fa-expand-alt mr-1"></i> Ampliar
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 shadow-lg">
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-4">Resumo do Processo</h3>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Atores envolvidos</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                                            <i class="fas fa-user text-[10px]"></i> Militar
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            <i class="fas fa-cog text-[10px]"></i> Sistema
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-cbm-100 dark:bg-cbm-900/30 text-cbm-700 dark:text-cbm-300">
+                                            <i class="fas fa-star text-[10px]"></i> Comandante
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                                            <i class="fas fa-user-tie text-[10px]"></i> Almoxarife
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Regra principal</span>
+                                    <div class="p-3 rounded-xl bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800/40">
+                                        <p class="text-sm text-purple-800 dark:text-purple-300 leading-relaxed">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Toda ocorrência deve ser documentada com evidências. Decisão final do comandante determina ação: reparo, substituição, baixa ou ressarcimento.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <a href="diagramas.html" class="inline-flex items-center gap-2 text-sm font-medium text-cbm-600 dark:text-cbm-400 hover:text-cbm-700 dark:hover:text-cbm-300 transition-colors">
+                                    <i class="fas fa-project-diagram"></i>
+                                    Ver diagrama relacionado
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+                <!-- Brand -->
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/CBMMT_00(1).png" alt="CBM-MT" class="h-10 w-10 rounded-lg object-contain">
+                        <div>
+                            <span class="text-lg font-bold text-cbm-700 dark:text-cbm-400">SIGA</span>
+                            <span class="block text-xs text-slate-500 dark:text-slate-400">Documentação v2.0</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Sistema Integrado de Gestão de Almoxarifado do Corpo de Bombeiros Militar de Mato Grosso.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Navegação</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="index.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Início</a></li>
+                        <li><a href="modulos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Módulos</a></li>
+                        <li><a href="arquitetura.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Arquitetura</a></li>
+                        <li><a href="diagramas.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Diagramas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Recursos</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="processos.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Processos</a></li>
+                        <li><a href="seguranca.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Segurança</a></li>
+                        <li><a href="downloads.html" class="text-sm text-slate-500 dark:text-slate-400 hover:text-cbm-600 dark:hover:text-cbm-400 transition-colors">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Contato</h4>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-building w-4 text-center"></i>
+                            CBM-MT - Cuiabá/MT
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                            <i class="fas fa-envelope w-4 text-center"></i>
+                            bea@cbm.mt.gov.br
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    &copy; 2025 Corpo de Bombeiros Militar de Mato Grosso. Todos os direitos reservados.
+                </p>
+                <p class="text-xs text-slate-400 dark:text-slate-500">
+                    Documentação SIGA v2.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="no-print fixed bottom-6 right-6 w-12 h-12 rounded-xl bg-cbm-700 hover:bg-cbm-600 text-white shadow-lg shadow-cbm-700/30 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 z-40">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/processes.js"></script>
+</body>
+</html>
