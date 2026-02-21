@@ -307,26 +307,35 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+                <!-- Python Backend -->
+                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-yellow-300 dark:hover:border-yellow-700" data-aos="fade-up" data-aos-delay="0">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-python text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Python (Django/FastAPI)</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Backend em Python com Django ou FastAPI. Endpoints RESTful, documentação OpenAPI/Swagger automática e ORM robusto para interação com o banco.</p>
+                </div>
+
+                <!-- React / React Native -->
+                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cyan-300 dark:hover:border-cyan-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-react text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">React / React Native</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Interface web responsiva com React e aplicativo móvel com React Native para operações de campo, transferência de custódia e consultas em tempo real.</p>
+                </div>
+
                 <!-- PostgreSQL 15+ -->
-                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700" data-aos="fade-up" data-aos-delay="0">
+                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700" data-aos="fade-up" data-aos-delay="200">
                     <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                         <i class="fas fa-database text-xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">PostgreSQL 15+</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Banco relacional robusto com extensões avançadas. Particionamento nativo, JSONB, triggers, funções PL/pgSQL e LISTEN/NOTIFY.</p>
-                </div>
-
-                <!-- REST API -->
-                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700" data-aos="fade-up" data-aos-delay="100">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-code text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">REST API</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Arquitetura de microsserviços com endpoints RESTful, documentação OpenAPI/Swagger e versionamento de API.</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Banco relacional robusto com particionamento nativo, JSONB, triggers, funções PL/pgSQL, LISTEN/NOTIFY para notificações em tempo real.</p>
                 </div>
 
                 <!-- JWT Authentication -->
-                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-700" data-aos="fade-up" data-aos-delay="200">
+                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-700" data-aos="fade-up" data-aos-delay="300">
                     <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 mb-4 group-hover:scale-110 transition-transform">
                         <i class="fas fa-key text-xl"></i>
                     </div>
@@ -335,21 +344,12 @@
                 </div>
 
                 <!-- RBAC Hierarquico -->
-                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700" data-aos="fade-up" data-aos-delay="300">
+                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700" data-aos="fade-up" data-aos-delay="400">
                     <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-cbm-100 dark:bg-cbm-900/30 text-cbm-600 dark:text-cbm-400 mb-4 group-hover:scale-110 transition-transform">
                         <i class="fas fa-shield-alt text-xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">RBAC Hierárquico</h3>
                     <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Controle de acesso baseado em papéis com 5 perfis, herança de permissões e controle granular por módulo.</p>
-                </div>
-
-                <!-- LISTEN/NOTIFY -->
-                <div class="group card-hover p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-700" data-aos="fade-up" data-aos-delay="400">
-                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-bell text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">LISTEN/NOTIFY</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Mecanismo nativo do PostgreSQL para notificações em tempo real sem polling, integrado com WebSocket no frontend.</p>
                 </div>
 
                 <!-- Particionamento -->

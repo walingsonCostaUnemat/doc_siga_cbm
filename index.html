@@ -223,7 +223,7 @@
                         O SIGA centraliza e automatiza todos os processos de almoxarifado do CBM-MT, desde o cadastro de materiais até o controle de operações em campo, garantindo rastreabilidade total e conformidade com a legislação vigente.
                     </p>
                     <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
-                        Desenvolvido com arquitetura robusta baseada em PostgreSQL, o sistema oferece controle hierárquico de acesso, auditoria completa de todas as operações, notificações em tempo real e suporte a operações de campo com transferência de custódia.
+                        Desenvolvido com arquitetura moderna utilizando Python (Django/FastAPI) no backend, React e React Native no frontend, e PostgreSQL como banco de dados, o sistema oferece controle hierárquico de acesso, auditoria completa de todas as operações, notificações em tempo real e suporte a operações de campo com transferência de custódia.
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium">
@@ -346,14 +346,26 @@
                 <p class="text-slate-500 dark:text-slate-400">Tecnologias que sustentam o SIGA</p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
-                    <i class="fas fa-database text-3xl text-blue-500"></i>
-                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">PostgreSQL</span>
+                    <i class="fab fa-python text-3xl text-yellow-500"></i>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Python</span>
                 </div>
                 <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
-                    <i class="fas fa-code text-3xl text-emerald-500"></i>
-                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">REST API</span>
+                    <i class="fas fa-server text-3xl text-emerald-500"></i>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Django/FastAPI</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
+                    <i class="fab fa-react text-3xl text-cyan-500"></i>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">React</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
+                    <i class="fas fa-mobile-alt text-3xl text-blue-500"></i>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">React Native</span>
+                </div>
+                <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
+                    <i class="fas fa-database text-3xl text-blue-600"></i>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">PostgreSQL</span>
                 </div>
                 <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
                     <i class="fas fa-key text-3xl text-amber-500"></i>
@@ -362,10 +374,6 @@
                 <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
                     <i class="fas fa-shield-alt text-3xl text-cbm-500"></i>
                     <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">RBAC</span>
-                </div>
-                <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
-                    <i class="fas fa-user-shield text-3xl text-purple-500"></i>
-                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">LGPD</span>
                 </div>
                 <div class="flex flex-col items-center gap-3 p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-cbm-300 dark:hover:border-cbm-700 transition-colors">
                     <i class="fas fa-bell text-3xl text-orange-500"></i>
